@@ -3,8 +3,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const connection = require("./database/database");
 
-const CategoriesControler = require("./categories/CategoriesController");
-const ArticlesControler = require("./articles/ArticlesController");
+const CategoriesController = require("./categories/CategoriesController");
+const ArticlesController = require("./articles/ArticlesController");
 
 const Article = require("./articles/Article");
 const Category = require("./categories/category");
@@ -28,8 +28,8 @@ connection
         console.log(error);
     })
 
-app.use("/",CategoriesControler);
-app.use("/",ArticlesControler);
+app.use("/",CategoriesController);
+app.use("/",ArticlesController);
 
 app.get("/",(req,res) => {
     res.render("index");
