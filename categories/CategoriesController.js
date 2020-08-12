@@ -3,8 +3,8 @@ const router = express.Router();
 const Category = require("./category");
 const slugify =require("slugify")
 
-router.get("/admin/categories/new",(req, res) => {
-    res.render("/admin/categories/new");
+router.get("admin/categories/new",(req, res) => {
+    res.render("admin/categories/new");
 })
 
 router.post("/categories/save", (req,res) => {
@@ -14,14 +14,14 @@ router.post("/categories/save", (req,res) => {
             title: title,
             slug: slugify(title) 
         }).then(() => {
-            res.redirect("/admin/categories");
+            res.redirect("admin/categories");
         })
     } else{
-        res.redirect('/admin/categories/new');
+        res.redirect('admin/categories/new');
     }
 })
 
-router.get("/admin/categories", (req, res) => {
+router.get("admin/categories", (req, res) => {
     Category.findAll().then(categories => {
         res.render("admin/categories/index", {categories: categories});
     })
@@ -37,32 +37,32 @@ router.post("/categories/delete", (req, res) => {
                     id: id
                 }
             }).then(() => {
-                res.redirect('/admin/categories')
+                res.redirect('admin/categories')
             })
 
         }else{ //se não for um numero
-            res.redirect('/admin/categories/')
+            res.redirect('admin/categories/')
         }
     } else{ // null
-        res.redirect("/admin/categories")
+        res.redirect("admin/categories")
     }
 });
 
-router.get("/admin/categories/edit/:id", (req, res) => {
+router.get("admin/categories/edit/:id", (req, res) => {
     var id = req.params.id;
 
     if(isNaN(id)){
-        res.redirect("/admin/categories/edit");
+        res.redirect("admin/categories/edit");
     }
 
     Category.findByPk(id).then(category => {
         if(category != undefined){
-            res.render("/admin/categories/edit", {category: category});
+            res.render("admin/categories/edit", {category: category});
         } else{
-            res.redirect("/admin/categories");
+            res.redirect("admin/categories");
         }
     }).catch(erro => {
-        res.redirect("/admin/categories");
+        res.redirect("admin/categories");
     })
 });
 
@@ -76,7 +76,7 @@ router.post("categories/update", (req, res) => {
             id: id
         }
     }).then(() => {
-        res.redirect("/admin/categories");
+        res.redirect("admin/categories");
     });
 });
 
