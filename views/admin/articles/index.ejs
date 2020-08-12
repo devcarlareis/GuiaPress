@@ -18,6 +18,7 @@
         </thead>
         <tbody>
            <% articles.forEach(articles => { %>
+            <tr>
              <td> <%= articles.Id %> </td>
              <td> <%= articles.title %> </td>
              <td> <%= articles.slug %> </td>
@@ -28,6 +29,7 @@
                     <button class="btn btn-danger">Deletar</button>
                 </form>  
             </td>
+            </tr>
           %> }) %>
         </tbody>
     </table>
