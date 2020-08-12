@@ -27,6 +27,7 @@ router.get("admin/categories", (req, res) => {
     })
 })
 
+//deletando uma categoria
 router.post("/categories/delete", (req, res) => {
     var id = req.body.id
     if(id != undefined){

@@ -4,7 +4,7 @@
 <div class="container">
     <hr>
     <h2>Categorias</h2>
-    <a class="btn btn-success" href="/admin/categories/new">Criar nova categoria</a>
+    <a class="btn btn-success" href="admin/categories/new">Criar nova categoria</a>
     <hr>
     <table class="table table-bordered">
         <thead>
@@ -22,7 +22,7 @@
                     <th><%= category.title %></th>
                     <th><%= category.slug %></th>
                     <th>
-                        <a href="/admin/categories/edit/<%= category.Id %>" class="btn btn-warning">Editar</a>
+                        <a href="admin/categories/edit/<%= category.Id %>" class="btn btn-warning">Editar</a>
 
                         <form method="POST" action="/categories/delete" style="display: inline;" onsubmit="confirmarDelecao(event, this)">
                             <input type="hidden" name="id" value="<%= category.id %>">
