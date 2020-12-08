@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 const connection = require("../database/database");
-const Category = require("../categories/category"); //primeiro passo para o relacionamento, importe.
+const Category = require("../categories/Category");
 
-const Article = connection.define('articles', {
+const Article = connection.define('articles',{
     title:{
         type: Sequelize.STRING,
         allowNull: false
@@ -16,12 +16,7 @@ const Article = connection.define('articles', {
     }
 })
 
-//expressando um relacionamento 1 para muitos no sequelize
-Category.hasMany(Article);//hasMany significa "tem muitos", o que eu estou dizendo é "1 categoria tem muitos artigos"
-
-
-//expressando um relacionamento 1 para 1 no sequelize
-Article.belongsTo(Category); //belomgsTo = significa pertende a.. oque eu estou dizendo é "1 artigo pertence a 1 categoria"
-
+Category.hasMany(Article); // UMA Categoria tem muitos artigos
+Article.belongsTo(Category); // UM Artigo pertence a uma categoria
 
 module.exports = Article;

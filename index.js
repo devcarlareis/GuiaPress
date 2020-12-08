@@ -3,57 +3,41 @@ const app = express();
 const bodyParser = require("body-parser");
 const connection = require("./database/database");
 
-const CategoriesController = require("./categories/CategoriesController");
-const ArticlesController = require("./articles/ArticlesController");
+const categoriesController = require("./categories/CategoriesController");
+const articlesController = require("./articles/ArticlesController");
 
 const Article = require("./articles/Article");
-const Category = require("./categories/category");
+const Category = require("./categories/Category");
 
-//View engine
+// View engine
 app.set('view engine','ejs');
 
-//static
+// Static
 app.use(express.static('public'));
 
 //Body parser
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-//Database
+// Database
+
 connection
     .authenticate()
     .then(() => {
-        console.log("Conexão feita com sucesso!")
+        console.log("Conexão feita com sucesso!");
     }).catch((error) => {
         console.log(error);
     })
 
-app.use("/",CategoriesController);
-app.use("/",ArticlesController);
 
-app.get("/",(req,res) => {
-    Article.findAll().then(articles =>{
-        res.render("index", {articles: articles});
-    })
-});
+app.use("/",categoriesController);    
+app.use("/",articlesController);
 
-app.get("/:slug", (req, res) => {
-    var slug = req.params.slug;
-    Article.findOne({
-        where: {
-            slug: slug
-        }
-    }).then(articles => {
-        if(articles != undefined){
-            res.render("article", {articles: articles});
-        }else {
-            res.redirect("/");
-        }
-    }).catch(err => {
-        res.redirect("/");
-    })
-});
+app.get("/", (req, res) => {
+    res.render("index");
+})
 
-app.listen(8080,() => {
+
+app.listen(8080, () => {
     console.log("O servidor está rodando!")
-});
+})
